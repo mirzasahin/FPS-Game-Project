@@ -24,7 +24,6 @@ public class MouseMovement : MonoBehaviour
     {
         // Getting the mouse inputs
         float mouseX = Input.GetAxis("Mouse X") * mouseSensivity * Time.deltaTime;
-        Debug.Log(mouseX);
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensivity * Time.deltaTime;
 
         // Rotation around the x axis (Look up and down)
