@@ -28,12 +28,12 @@ public class Weapon : MonoBehaviour
         bullet.GetComponent<Rigidbody>().AddForce(bulletSpawn.forward.normalized * bulletVelocity, ForceMode.Impulse);
 
         // Destroy the bullet after some time
-        StartCoroutine(DestroyBulletAfterTime(bullet, bulletPrefabLifeTime));
+        DestroyBulletAfterTime(bullet);
+
     }
 
-    private IEnumerator DestroyBulletAfterTime(GameObject bullet, float delay)
+    private void DestroyBulletAfterTime(GameObject bullet)
     {
-        yield return new WaitForSeconds(delay);
-        Destroy(bullet);
+        Destroy(bullet, bulletPrefabLifeTime);
     }
 }
