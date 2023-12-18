@@ -118,6 +118,8 @@ public class Weapon : MonoBehaviour
         {
             // Shooting at the air
             targetPoint = ray.GetPoint(100);
+            Debug.Log(ray);
+            Debug.Log(targetPoint);
         }
 
         Vector3 direction = targetPoint - bulletSpawn.position;
