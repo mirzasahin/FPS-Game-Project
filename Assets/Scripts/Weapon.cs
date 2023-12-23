@@ -30,7 +30,7 @@ public class Weapon : MonoBehaviour
     public float bulletPrefabLifeTime = 3f; // seconds
 
     public GameObject muzzleEffect;
-    private Animator animator;
+    internal Animator animator; // Can access it from other scripts, but can't set from inspector
 
     // Loading
     public float reloadTime;
@@ -39,6 +39,7 @@ public class Weapon : MonoBehaviour
 
     public Vector3 spawnPosition;
     public Vector3 spawnRotation;
+    public Vector3 spawnScale;
 
     public enum WeaponModel
     {
