@@ -74,32 +74,80 @@ public class HUDManager : MonoBehaviour
 
     private Sprite GetWeaponSprite(Weapon.WeaponModel model)
     {
-         switch(model)
+        GameObject weaponPrefab = null;
+
+        switch (model)
         {
             case Weapon.WeaponModel.M1911:
-                return Instantiate(Resources.Load<GameObject>("M1911_Weapon")).GetComponent<SpriteRenderer>().sprite;
+                weaponPrefab = Resources.Load<GameObject>("M1911_Weapon");
+                break;
 
             case Weapon.WeaponModel.AK74:
-                return Instantiate(Resources.Load<GameObject>("AK74_Weapon")).GetComponent<SpriteRenderer>().sprite;
+                weaponPrefab = Resources.Load<GameObject>("AK74_Weapon");
+                break;
 
             default:
                 return null;
         }
+
+        if (weaponPrefab != null)
+        {
+            SpriteRenderer spriteRenderer = weaponPrefab.GetComponent<SpriteRenderer>();
+
+            if (spriteRenderer != null)
+            {
+                return spriteRenderer.sprite;
+            }
+            else
+            {
+                Debug.LogError("SpriteRenderer not found on the weapon prefab.");
+            }
+        }
+        else
+        {
+            Debug.LogError($"Prefab not found for weapon model: {model}");
+        }
+
+        return null; // Hata durumunda null döndürülebilir veya baþka bir varsayýlan sprite atanabilir.
     }
 
     private Sprite GetAmmoSprite(Weapon.WeaponModel model)
     {
+        GameObject ammoPrefab = null;
+
         switch (model)
         {
             case Weapon.WeaponModel.M1911:
-                return Instantiate(Resources.Load<GameObject>("M1911_Ammo")).GetComponent<SpriteRenderer>().sprite;
+                ammoPrefab = Resources.Load<GameObject>("M1911_Ammo");
+                break;
 
             case Weapon.WeaponModel.AK74:
-                return Instantiate(Resources.Load<GameObject>("AK74_Ammo")).GetComponent<SpriteRenderer>().sprite;
+                ammoPrefab = Resources.Load<GameObject>("AK74_Ammo");
+                break;
 
             default:
                 return null;
         }
+
+        if (ammoPrefab != null)
+        {
+            SpriteRenderer spriteRenderer = ammoPrefab.GetComponent<SpriteRenderer>();
+
+            if (spriteRenderer != null)
+            {
+                return spriteRenderer.sprite;
+            }
+            else
+            {
+                Debug.LogError("SpriteRenderer not found on the ammo prefab.");
+            }
+        }
+        else
+        {
+            Debug.LogError($"Prefab not found for ammo model: {model}");
+        }
+
+        return null; // Hata durumunda null döndürülebilir veya baþka bir varsayýlan sprite atanabilir.
     }
 
     private GameObject GetUnActiveWeaponSlot()
