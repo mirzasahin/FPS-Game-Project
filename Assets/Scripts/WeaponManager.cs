@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
+using static Weapon;
 
 public class WeaponManager : MonoBehaviour
 {
@@ -10,6 +12,10 @@ public class WeaponManager : MonoBehaviour
     public List<GameObject> weaponSlots;
 
     public GameObject activeWeaponSlot;
+
+    [Header("Ammo")]
+    public int totalM1911Ammo = 0;
+    public int totalAK74Ammo = 0;
 
     private void Awake()
     {
@@ -101,6 +107,50 @@ public class WeaponManager : MonoBehaviour
         {
             Weapon newWeapon = activeWeaponSlot.transform.GetChild(0).GetComponent<Weapon>();
             newWeapon.isActiveWeapon = true;
+        }
+    }
+
+    internal void PickupAmmo(AmmoBox ammo)
+    {
+        switch (ammo.ammoType)
+        {
+            case AmmoBox.AmmoType.M1911Ammo:
+                totalM1911Ammo += ammo.ammoAmount;
+                break;
+            case AmmoBox.AmmoType.AK74Ammo:
+                totalAK74Ammo += ammo.ammoAmount;
+                break;
+        }
+    }
+
+    internal void DecreaseTotalAmmo(int bulletsToDecrease, Weapon.WeaponModel thisWeaponModel)
+    {
+        switch (thisWeaponModel)
+        {
+            case Weapon.WeaponModel.M1911:
+                totalM1911Ammo -= bulletsToDecrease;
+                break;
+
+            case Weapon.WeaponModel.AK74:
+                totalAK74Ammo -= bulletsToDecrease;
+                break;
+
+        }   
+    }
+
+    public int CheckAmmoLeftFor(Weapon.WeaponModel thisWeaponModel)
+    {
+        switch (thisWeaponModel)
+        {
+            case WeaponModel.M1911:
+                return totalM1911Ammo;
+
+            case WeaponModel.AK74:
+                return totalAK74Ammo;
+
+            default:
+                return 0;
+
         }
     }
 }
