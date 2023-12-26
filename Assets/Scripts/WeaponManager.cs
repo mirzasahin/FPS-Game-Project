@@ -17,6 +17,9 @@ public class WeaponManager : MonoBehaviour
     public int totalM1911Ammo = 0;
     public int totalAK74Ammo = 0;
 
+    [Header("Throwables")]
+    public int grenades = 0;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -153,4 +156,23 @@ public class WeaponManager : MonoBehaviour
 
         }
     }
+
+    #region || ----- Throwables ----- ||
+    public void PickupThrowable(Throwable throwable)
+    {
+        switch (throwable.throwableType)
+        {
+            case Throwable.ThrowableType Grenade:
+                PickupGrenade();
+                break;
+        }
+    }
+
+    private void PickupGrenade()
+    {
+        grenades += 1;
+
+        HUDManager.Instance.UpdateThrowables(Throwable.ThrowableType.Grenade);
+    }
+    #endregion
 }

@@ -76,7 +76,7 @@ public class HUDManager : MonoBehaviour
 
     private Sprite GetWeaponSprite(Weapon.WeaponModel model)
     {
-        GameObject weaponPrefab = null;
+        GameObject weaponPrefab;
 
         switch (model)
         {
@@ -163,5 +163,16 @@ public class HUDManager : MonoBehaviour
         }
         // this will never happen, but we need to return something
         return null;
+    }
+
+    internal void UpdateThrowables(Throwable.ThrowableType throwable)
+    {
+        switch (throwable)
+        {
+            case Throwable.ThrowableType.Grenade:
+                lethalAmountUI.text = $"{WeaponManager.Instance.grenades}";
+                lethalUI.sprite = Resources.Load<GameObject>("Grenade").GetComponent<SpriteRenderer>().sprite;
+                break;
+        }
     }
 }
