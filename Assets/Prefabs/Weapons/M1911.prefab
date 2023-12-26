@@ -112,7 +112,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 939575042610130370}
-  m_LocalRotation: {x: 0.68301284, y: 0.68301284, z: -0.1830124, w: -0.1830124}
+  m_LocalRotation: {x: 0.6830127, y: 0.6830127, z: -0.18301265, w: -0.18301265}
   m_LocalPosition: {x: -15.695694, y: 1.4184035, z: 6.967931}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
@@ -193,7 +193,9 @@ MonoBehaviour:
   shootingDelay: 0.3
   bulletsPerBurst: 1
   burstBulletsLeft: 0
-  spreadIntensity: 0.05
+  spreadIntensity: 0
+  hipSpreadIntensity: 0.4
+  adsSpreadIntensity: 0.04
   bulletPrefab: {fileID: 1967404907871111566, guid: 46c66d357ee95374fb2306fdf1a4d554,
     type: 3}
   bulletSpawn: {fileID: 947830201673903968}
