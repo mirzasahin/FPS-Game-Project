@@ -41,6 +41,8 @@ public class Weapon : MonoBehaviour
     public Vector3 spawnRotation;
     public Vector3 spawnScale;
 
+    bool isADS;
+
     public enum WeaponModel
     {
         M1911,
@@ -71,9 +73,22 @@ public class Weapon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetMouseButtonDown(1))
+        {
+            animator.SetTrigger("enterADS");
+            isADS = true;
+        }
+
+        if (Input.GetMouseButtonUp(1))
+        {
+            animator.SetTrigger("exitADS");
+            isADS = false;
+        }
 
         if (isActiveWeapon)
         {
+
+
             GetComponent<Outline>().enabled = false;
             
             // Empty Magazine Sound
@@ -118,8 +133,18 @@ public class Weapon : MonoBehaviour
     private void FireWeapon()
     {
         bulletsLeft--;
+
         muzzleEffect.GetComponent<ParticleSystem>().Play();
-        animator.SetTrigger("RECOIL");
+
+        if(isADS)
+        {
+            animator.SetTrigger("RECOIL_ADS");
+        }
+        else
+        {
+            animator.SetTrigger("RECOIL");
+        }
+
 
         //SoundManager.Instance.shootingSoundM1911.Play();
 
