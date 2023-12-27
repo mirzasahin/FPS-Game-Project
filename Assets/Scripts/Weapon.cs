@@ -81,18 +81,28 @@ public class Weapon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(1) && isActiveWeapon)
-        {
-            EnterADS();
-        }
-
-        if (Input.GetMouseButtonUp(1) && isActiveWeapon)
-        {
-            ExitADS();
-        }
+        
 
         if (isActiveWeapon)
         {
+
+            foreach (Transform child in transform)
+            {
+                child.gameObject.layer = LayerMask.NameToLayer("WeaponRender");
+            }
+
+
+
+            if (Input.GetMouseButtonDown(1) && isActiveWeapon)
+            {
+                EnterADS();
+            }
+
+            if (Input.GetMouseButtonUp(1) && isActiveWeapon)
+            {
+                ExitADS();
+            }
+
             GetComponent<Outline>().enabled = false;
             
             // Empty Magazine Sound
@@ -128,6 +138,13 @@ public class Weapon : MonoBehaviour
             {
                 burstBulletsLeft = bulletsPerBurst;
                 FireWeapon();
+            }
+        }
+        else
+        {
+            foreach (Transform child in transform)
+            {
+                child.gameObject.layer = LayerMask.NameToLayer("Default");
             }
         }
     }
