@@ -19,6 +19,11 @@ public class WeaponManager : MonoBehaviour
 
     [Header("Throwables")]
     public int grenades = 0;
+    public float throwForce = 10f;
+    public GameObject grenadePrefab;
+    public GameObject throwableSpawn;
+    public float forceMultiplier = 0;
+    public float forceMultiplierLimit = 2f;
 
     private void Awake()
     {
@@ -60,7 +65,31 @@ public class WeaponManager : MonoBehaviour
         {
             SwitchActiveSlot(1);
         }
+
+        if(Input.GetKey(KeyCode.G))
+        {
+            forceMultiplier += Time.deltaTime;
+
+            if(forceMultiplier > forceMultiplierLimit)
+            {
+                forceMultiplier = forceMultiplierLimit;
+            }
+        }
+
+        if (Input.GetKeyUp(KeyCode.G))
+        {
+            if(grenades  > 0)
+            {
+                ThrowLethal();
+            }
+
+            forceMultiplier = 0;
+        }
+
     }
+
+   
+
     public void PickupWeapon(GameObject pickedupWeapon)
     {
         AddWeaponIntoActiveSlot(pickedupWeapon);
@@ -162,7 +191,7 @@ public class WeaponManager : MonoBehaviour
     {
         switch (throwable.throwableType)
         {
-            case Throwable.ThrowableType Grenade:
+            case Throwable.ThrowableType.Grenade:
                 PickupGrenade();
                 break;
         }
@@ -174,5 +203,22 @@ public class WeaponManager : MonoBehaviour
 
         HUDManager.Instance.UpdateThrowables(Throwable.ThrowableType.Grenade);
     }
+
+    private void ThrowLethal()
+    {
+        GameObject lethalPrefab = grenadePrefab;
+
+        GameObject throwable = Instantiate(lethalPrefab, throwableSpawn.transform.position, Camera.main.transform.rotation);
+
+        Rigidbody rb = throwable.GetComponent<Rigidbody>();
+
+        rb.AddForce(Camera.main.transform.forward * (throwForce * forceMultiplier), ForceMode.Impulse);
+        
+        throwable.GetComponent<Throwable>().hasBeenThrown = true;
+
+        grenades -= 1;
+        HUDManager.Instance.UpdateThrowables(Throwable.ThrowableType.Grenade);
+    }
+
     #endregion
 }
