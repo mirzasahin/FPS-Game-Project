@@ -89,6 +89,7 @@ public class Weapon : MonoBehaviour
             {
                 child.gameObject.layer = LayerMask.NameToLayer("WeaponRender");
             }
+            gameObject.layer = LayerMask.NameToLayer("WeaponRender");
 
             if (Input.GetMouseButtonDown(1) && isActiveWeapon)
             {
@@ -143,6 +144,7 @@ public class Weapon : MonoBehaviour
             {
                 child.gameObject.layer = LayerMask.NameToLayer("Default");
             }
+            gameObject.layer = LayerMask.NameToLayer("Default");
         }
     }
 
