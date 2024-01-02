@@ -9,6 +9,7 @@ using UnityEngine.PlayerLoop;
 public class Weapon : MonoBehaviour
 {
     public bool isActiveWeapon;
+    public int weaponDamage;
 
     [Header("Shooting")]
     // Shooting
@@ -85,9 +86,9 @@ public class Weapon : MonoBehaviour
 
         if (isActiveWeapon)
         {
-            foreach (Transform child in transform)
+            foreach (Transform child in transform) // We access the gameobject itself with transform, and the parts inside it with child.
             {
-                child.gameObject.layer = LayerMask.NameToLayer("WeaponRender");
+                child.gameObject.layer = LayerMask.NameToLayer("WeaponRender"); // To prevent weapons from being visible behind walls
             }
             gameObject.layer = LayerMask.NameToLayer("WeaponRender");
 
@@ -190,6 +191,9 @@ public class Weapon : MonoBehaviour
 
         // Instantiate the bullet
         GameObject bullet = Instantiate(bulletPrefab, bulletSpawn.position, Quaternion.identity);
+
+        Bullet bul = bullet.GetComponent<Bullet>();
+        bul.bulletDamage = weaponDamage;
 
         // Poiting the bullet to face the shooting direction
         bullet.transform.forward = shootingDirection;
