@@ -8,6 +8,9 @@ public class NavigationScript : MonoBehaviour
     public Transform player;
     private NavMeshAgent agent;
 
+    public float followDistance;
+    public float distance;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,6 +20,15 @@ public class NavigationScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        agent.destination = player.position;
+        distance = Vector3.Distance(transform.position, player.position);
+
+        if (distance <= followDistance && gameObject.GetComponent<Enemy>().isDie == false)
+        {
+            agent.destination = player.position;
+        }
+        else
+        {
+            agent.ResetPath();
+        }
     }
 }
