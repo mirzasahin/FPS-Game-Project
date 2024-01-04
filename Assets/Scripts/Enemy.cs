@@ -20,19 +20,6 @@ public class Enemy : MonoBehaviour
         navAgent = GetComponent<NavMeshAgent>();
     }
 
-    private void Update()
-    {
-        if(navAgent.velocity.magnitude > 0.1f)
-        {
-            animator.SetBool("isWalking", true);
-        }
-
-        else
-        {
-            animator.SetBool("isWalking", false);
-        }
-    }
-
     public void TakeDamage(int damageAmount)
     {
         HP -= damageAmount;
