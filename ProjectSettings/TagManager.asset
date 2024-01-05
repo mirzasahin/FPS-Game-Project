@@ -8,6 +8,7 @@ TagManager:
   - Wall
   - Beer
   - Enemy
+  - Waypoints
   layers:
   - Default
   - TransparentFX
