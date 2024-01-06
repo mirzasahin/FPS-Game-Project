@@ -15,8 +15,6 @@ public class ZombiePatrolingState : StateMachineBehaviour
     public float detectionArea = 18f;
     public float patrolSpeed = 5f;
 
-    public bool isDefineNewWaypoint;
-
     Vector3 nextPosition;
 
     List<Transform> waypointList = new List<Transform>();
@@ -30,8 +28,6 @@ public class ZombiePatrolingState : StateMachineBehaviour
 
         agent.speed = patrolSpeed;
         timer = 0;
-        isDefineNewWaypoint = false;
-        Debug.Log(isDefineNewWaypoint);
 
         // --- Get all waypoints and Move to First Waypoint --- //
 
@@ -48,17 +44,13 @@ public class ZombiePatrolingState : StateMachineBehaviour
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         agent.SetDestination(nextPosition);
-        isDefineNewWaypoint = false;
 
         // --- If agent arrived at waypoint, move to next waypoint --- //
-        if (Vector3.Distance(animator.transform.position, nextPosition) <= agent.stoppingDistance && !isDefineNewWaypoint )
+        if (Vector3.Distance(animator.transform.position, nextPosition) <= agent.stoppingDistance)
         {
-            isDefineNewWaypoint = true;
-            Debug.Log(isDefineNewWaypoint);
             nextPosition = waypointList[Random.Range(0, waypointList.Count)].position;
             Debug.Log(Random.Range(0, 10));
         }
-
       
         // --- Transition to Idle State --- //
 
@@ -75,9 +67,6 @@ public class ZombiePatrolingState : StateMachineBehaviour
         {
             animator.SetBool("isChasing", true);
         }
-
-
-
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
