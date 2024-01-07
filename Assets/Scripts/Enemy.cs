@@ -10,6 +10,8 @@ public class Enemy : MonoBehaviour
     public bool isDie;
     private Animator animator;
 
+    private Transform player;
+
     private NavMeshAgent navAgent;
 
 
@@ -19,7 +21,7 @@ public class Enemy : MonoBehaviour
         animator = GetComponent<Animator>();
         navAgent = GetComponent<NavMeshAgent>();
     }
-
+    
     public void TakeDamage(int damageAmount)
     {
         HP -= damageAmount;
@@ -43,5 +45,17 @@ public class Enemy : MonoBehaviour
         {
             animator.SetTrigger("DAMAGE");
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, 1.5f); // Attacking // Stop Attacking
+
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, 18f); // Detection (Start Chasing)
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, 21f); // Stop Chasing
     }
 }

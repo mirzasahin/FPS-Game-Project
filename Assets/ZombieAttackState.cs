@@ -3,20 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.PlayerLoop;
 
 public class ZombieAttackState : StateMachineBehaviour
 {
     Transform player;
     NavMeshAgent agent;
 
-    public float stopAttackingDistance = 2.5f;
+    public float stopAttackingDistance = 1.5f;
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         agent = animator.GetComponent<NavMeshAgent>();
     }
-
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         LookAtPlayer();
