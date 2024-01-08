@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
     Vector3 velocity;
 
     bool isGrounded;
-    bool isMoving;
+    public bool isMoving;
 
     private Vector3 lastPosition = new Vector3(0f, 0f, 0f);
 
@@ -73,6 +73,5 @@ public class PlayerMovement : MonoBehaviour
         }
 
         lastPosition = gameObject.transform.position;
-
     }
 }

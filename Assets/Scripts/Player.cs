@@ -20,6 +20,10 @@ public class Player : MonoBehaviour
         if(HP <= 0)
         {
             Debug.Log("Player Dead..");
+
+            // Game over
+            // Re Spawn Player
+            // Dying Animation
         }
         else
         {

@@ -11,6 +11,8 @@ public class Weapon : MonoBehaviour
     public bool isActiveWeapon;
     public int weaponDamage;
 
+    public PlayerMovement playerMovement;
+
     [Header("Shooting")]
     // Shooting
     public bool isShooting, readyToShoot;
@@ -79,6 +81,11 @@ public class Weapon : MonoBehaviour
         spreadIntensity = hipSpreadIntensity;
     }
 
+    private void Start()
+    {
+        playerMovement = FindAnyObjectByType<PlayerMovement>();
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -103,7 +110,9 @@ public class Weapon : MonoBehaviour
             }
 
             GetComponent<Outline>().enabled = false;
-            
+
+            isPlayerRun();
+
             // Empty Magazine Sound
             if (bulletsLeft == 0 && isShooting)
             {
@@ -146,6 +155,18 @@ public class Weapon : MonoBehaviour
                 child.gameObject.layer = LayerMask.NameToLayer("Default");
             }
             gameObject.layer = LayerMask.NameToLayer("Default");
+        }
+    }
+
+    private void isPlayerRun()
+    {
+        if (playerMovement.isMoving)
+        {
+            animator.SetBool("isRun", true);
+        }
+        else
+        {
+            animator.SetBool("isRun", false);
         }
     }
 

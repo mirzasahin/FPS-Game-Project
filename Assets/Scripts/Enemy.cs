@@ -14,6 +14,8 @@ public class Enemy : MonoBehaviour
 
     private NavMeshAgent navAgent;
 
+    public bool isDead;
+
 
     // Start is called before the first frame update
     void Start()
@@ -21,7 +23,7 @@ public class Enemy : MonoBehaviour
         animator = GetComponent<Animator>();
         navAgent = GetComponent<NavMeshAgent>();
     }
-    
+
     public void TakeDamage(int damageAmount)
     {
         HP -= damageAmount;
@@ -40,6 +42,8 @@ public class Enemy : MonoBehaviour
             {
                 animator.SetTrigger("DIE2");
             }
+
+            isDead = true;
         }
         else
         {
