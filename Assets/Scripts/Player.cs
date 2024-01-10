@@ -1,19 +1,24 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    public int HP;
+    public int HP = 100;
     public GameObject bloodyScreen;
 
-    // Start is called before the first frame update
+    public TextMeshProUGUI playerHealthUI;
 
+    public GameObject gameOverUI;
+
+    // Start is called before the first frame update
     private void Start()
     {
         HP = 100;
+        playerHealthUI.text = $"Health: {HP}";
     }
 
     public void TakeDamage(int damageAmout)
@@ -23,6 +28,8 @@ public class Player : MonoBehaviour
         if(HP <= 0)
         {
             Debug.Log("Player Dead..");
+            PlayerDead();
+
             // Game over
             // Re Spawn Player
             // Dying Animation
@@ -31,8 +38,28 @@ public class Player : MonoBehaviour
         {
             Debug.Log("Player Hit");
             StartCoroutine(BloodyScreenEffect());
+            playerHealthUI.text = $"Health: {HP}";
 
         }
+    }
+
+    private void PlayerDead()
+    {
+        GetComponent<MouseMovement>().enabled = false;
+        GetComponent<PlayerMovement>().enabled = false;
+
+        // Dying Animation
+        GetComponentInChildren<Animator>().enabled = true;
+        playerHealthUI.gameObject.SetActive(false);
+
+        GetComponent<ScreenBlackout>().StartFade();
+        StartCoroutine(ShowGameOverUI());
+    }
+
+    private IEnumerator ShowGameOverUI()
+    { 
+        yield return new WaitForSeconds(1f);
+        gameOverUI.gameObject.SetActive(true);
     }
 
     private IEnumerator BloodyScreenEffect()
