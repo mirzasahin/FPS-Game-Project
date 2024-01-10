@@ -44,10 +44,16 @@ public class Enemy : MonoBehaviour
             }
 
             isDead = true;
+
+            // Dead Sound
+            SoundManager.Instance.zombieChannel2.PlayOneShot(SoundManager.Instance.zombieDeath);
         }
         else
         {
             animator.SetTrigger("DAMAGE");
+
+            // Hurt Sound
+            SoundManager.Instance.zombieChannel2.PlayOneShot(SoundManager.Instance.zombieHurt);
         }
     }
 
