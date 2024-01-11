@@ -7,12 +7,13 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    public int HP = 100;
+    public int HP;
     public GameObject bloodyScreen;
 
     public TextMeshProUGUI playerHealthUI;
-
     public GameObject gameOverUI;
+
+    public bool isDead;
 
     // Start is called before the first frame update
     private void Start()
@@ -29,6 +30,7 @@ public class Player : MonoBehaviour
         {
             Debug.Log("Player Dead..");
             PlayerDead();
+            isDead = true;
 
             // Game over
             // Re Spawn Player
@@ -39,12 +41,16 @@ public class Player : MonoBehaviour
             Debug.Log("Player Hit");
             StartCoroutine(BloodyScreenEffect());
             playerHealthUI.text = $"Health: {HP}";
-
+            SoundManager.Instance.playerChannel.PlayOneShot(SoundManager.Instance.playerHurt);
         }
     }
 
     private void PlayerDead()
     {
+        SoundManager.Instance.playerChannel.PlayOneShot(SoundManager.Instance.playerDie);
+
+        SoundManager.Instance.playerChannel2.PlayOneShot(SoundManager.Instance.gameOverMusic);
+
         GetComponent<MouseMovement>().enabled = false;
         GetComponent<PlayerMovement>().enabled = false;
 
@@ -104,7 +110,10 @@ public class Player : MonoBehaviour
     {
         if (other.CompareTag("ZombieHand"))
         {
-            TakeDamage(other.gameObject.GetComponent<ZombieHand>().damage);
+            if(isDead == false)
+            {
+                TakeDamage(other.gameObject.GetComponent<ZombieHand>().damage);
+            }
         }
     }
 }
