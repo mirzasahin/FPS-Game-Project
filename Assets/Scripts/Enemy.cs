@@ -60,12 +60,12 @@ public class Enemy : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, 1.5f); // Attacking // Stop Attacking
+        Gizmos.DrawWireSphere(transform.position, 2f); // Attacking // Stop Attacking
 
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, 18f); // Detection (Start Chasing)
+        Gizmos.DrawWireSphere(transform.position, 10f); // Detection (Start Chasing)
 
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, 21f); // Stop Chasing
+        Gizmos.DrawWireSphere(transform.position, 19f); // Stop Chasing
     }
 }

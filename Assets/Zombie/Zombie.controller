@@ -62,8 +62,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2d1b24cf840a2341bb1edacf7b0c881, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  patrolingTime: 20
-  detectionArea: 18
+  patrolingTime: 25
+  detectionArea: 10
   patrolSpeed: 0.7
 --- !u!1102 &-4327848852965909146
 AnimatorState:
@@ -388,7 +388,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   idleTime: 4
-  detectionAreaRadius: 18
+  detectionAreaRadius: 10
 --- !u!1102 &262132592751880641
 AnimatorState:
   serializedVersion: 6

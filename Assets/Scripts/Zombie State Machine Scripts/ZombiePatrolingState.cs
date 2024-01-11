@@ -12,7 +12,7 @@ public class ZombiePatrolingState : StateMachineBehaviour
     Transform player;
     NavMeshAgent agent;
 
-    public float detectionArea = 18f;
+    public float detectionArea = 10f;
     public float patrolSpeed = 0.7f;
 
     Vector3 nextPosition;
