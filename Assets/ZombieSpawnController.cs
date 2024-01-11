@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -20,6 +21,9 @@ public class ZombieSpawnController : MonoBehaviour
     public List<Enemy> currentZombiesAlive;
 
     public GameObject zombiePrefab;
+
+    public TextMeshProUGUI waveOverUI;
+    public TextMeshProUGUI cooldownCouterUI;
 
     private void Start()
     {
@@ -95,15 +99,20 @@ public class ZombieSpawnController : MonoBehaviour
             cooldownCounter = waveCooldown;
         }
 
+        cooldownCouterUI.text = cooldownCounter.ToString();
+
     }
 
     private IEnumerator WaveCooldown()
     {
         inCooldown = true;
+        waveOverUI.gameObject.SetActive(true);
 
         yield return new WaitForSeconds(waveCooldown);
 
         inCooldown = false;
+
+        waveOverUI.gameObject.SetActive(false);
 
         currentZombiesPerWave *= 2;
         StartNextWave();
