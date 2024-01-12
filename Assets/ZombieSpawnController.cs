@@ -24,6 +24,7 @@ public class ZombieSpawnController : MonoBehaviour
 
     public TextMeshProUGUI waveOverUI;
     public TextMeshProUGUI cooldownCouterUI;
+    public TextMeshProUGUI currentWaveUI;
 
     private void Start()
     {
@@ -37,6 +38,7 @@ public class ZombieSpawnController : MonoBehaviour
         currentZombiesAlive.Clear();
 
         currentWave++;
+        currentWaveUI.text = "Wave: " + currentWave.ToString();
         StartCoroutine(SpawnWave());
     }
 
@@ -99,7 +101,7 @@ public class ZombieSpawnController : MonoBehaviour
             cooldownCounter = waveCooldown;
         }
 
-        cooldownCouterUI.text = cooldownCounter.ToString();
+        cooldownCouterUI.text = cooldownCounter.ToString("F0");
 
     }
 
