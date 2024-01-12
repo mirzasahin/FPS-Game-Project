@@ -31,6 +31,8 @@ public class ZombieSpawnController : MonoBehaviour
         currentZombiesPerWave = initialZombiesPerWave;
 
         StartNextWave();
+
+        
     }
 
     private void StartNextWave()
@@ -40,6 +42,11 @@ public class ZombieSpawnController : MonoBehaviour
         currentWave++;
         currentWaveUI.text = "Wave: " + currentWave.ToString();
         StartCoroutine(SpawnWave());
+
+        if (currentWave > PlayerPrefs.GetInt("BestWaveSavedValue"))
+        {
+            PlayerPrefs.SetInt("BestWaveSavedValue", currentWave);
+        }
     }
 
     private IEnumerator SpawnWave()
@@ -64,6 +71,8 @@ public class ZombieSpawnController : MonoBehaviour
 
     private void Update()
     {
+
+       
         // Get all dead zombies
         List<Enemy> zombiesToRemove = new List<Enemy>();
         foreach (Enemy zombie in currentZombiesAlive)
@@ -117,6 +126,7 @@ public class ZombieSpawnController : MonoBehaviour
         waveOverUI.gameObject.SetActive(false);
 
         currentZombiesPerWave *= 2;
+
         StartNextWave();
     }
 }
