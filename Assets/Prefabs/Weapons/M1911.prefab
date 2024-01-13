@@ -123,7 +123,7 @@ Transform:
   - {fileID: 5438590660238678409}
   - {fileID: 947830201673903968}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 210, z: 90}
 --- !u!33 &6016181500271587850
 MeshFilter:
@@ -189,6 +189,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isActiveWeapon: 0
   weaponDamage: 13
+  playerMovement: {fileID: 0}
   isShooting: 0
   readyToShoot: 0
   shootingDelay: 0.3

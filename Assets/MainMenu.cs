@@ -10,9 +10,14 @@ public class MainMenu : MonoBehaviour
 
     string newGameScene = "Level 1";
 
+    public AudioClip bg_music;
+    public AudioSource main_channel;
+
     // Start is called before the first frame update
     void Start()
     {
+        main_channel.PlayOneShot(bg_music);
+
         // Set the high score text
         int highScore = SaveLoadManager.Instance.LoadHighScore();
         highScoreUI.text = $"Top Wave Survived: {highScore}";
@@ -20,6 +25,7 @@ public class MainMenu : MonoBehaviour
 
     public void StartNewGame()
     {
+        main_channel.Stop();
         SceneManager.LoadScene(newGameScene);
     }
 
